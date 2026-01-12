@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Histórico · Networking Economía</title>
+  <meta name="description" content="Histórico de empresas e instituciones asistentes en 2024 y 2025, con galería de fotos."/>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">
+      <div class="brand-badge" aria-hidden="true"></div>
+      <div class="brand-title">
+        <strong>Networking Economía</strong>
+        <span>Histórico</span>
+      </div>
+    </a>
+
+    <nav class="nav-links" aria-label="Navegación principal">
+      <a data-nav href="index.html">Home</a>
+      <a data-nav href="agenda-2026.html">Agenda 2026</a>
+      <a data-nav href="registro.html">Registro alumnxs</a>
+      <a data-nav href="historico.html">Histórico</a>
+      <a data-nav href="faq.html">FAQ</a>
+      <a data-nav href="contacto.html">Contacto</a>
+    </nav>
+
+    <div class="nav-cta">
+      <a class="btn primary" href="registro.html">Registrarme</a>
+    </div>
+  </div>
+</header>
+
+<main id="main" class="container">
+  <section class="section">
+    <div class="section-head reveal">
+      <div>
+        <h1 class="h1" style="margin:0;">Histórico</h1>
+        <p class="sub">Empresas e instituciones que han participado (2024 y 2025) + fotos. Edita el archivo <b>js/data.sample.js</b>.</p>
+      </div>
+    </div>
+
+    <div class="toolbar reveal" aria-label="Filtros">
+      <button class="chipbtn active" data-filter="all">Todo</button>
+      <button class="chipbtn" data-filter="2024">2024</button>
+      <button class="chipbtn" data-filter="2025">2025</button>
+      <span class="pill" style="margin-left:auto;"><span class="dot"></span><span id="countEmp">—</span></span>
+    </div>
+
+    <div class="grid-cards" id="empGrid" aria-label="Lista de empresas"></div>
+
+    <div class="section-head reveal" style="margin-top:22px;">
+      <div>
+        <h2 class="h2">Fotos</h2>
+        <p class="sub">Placeholder: agrega imágenes en <b>/assets</b> y referencia rutas en <b>data.sample.js</b>.</p>
+      </div>
+    </div>
+    <div class="gallery reveal" id="gal">
+      <div class="ph"></div><div class="ph"></div><div class="ph"></div><div class="ph"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <strong>Tip</strong>
+      <p>El histórico también sirve como “señal”: ayuda a que alumnxs entiendan el tipo de instituciones que suelen asistir.</p>
+    </div>
+    <div>
+      <strong>Agenda 2026</strong>
+      <p><a href="agenda-2026.html">Ver agenda</a></p>
+    </div>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script src="js/data.sample.js"></script>
+<script>
+  const data = window.NETWORKING_HISTORICO || { empresas:[], fotos:[] };
+  const grid = document.getElementById("empGrid");
+  const count = document.getElementById("countEmp");
+
+  const render = (year)=>{
+    grid.innerHTML = "";
+    const items = data.empresas.filter(e => year==="all" ? true : String(e.anio)===String(year));
+    count.textContent = `${items.length} institución(es)`;
+    items.forEach(e=>{
+      const el = document.createElement("div");
+      el.className = "company reveal in";
+      el.innerHTML = `
+        <div class="top">
+          <b>${e.nombre}</b>
+          <span class="tag">${e.anio}</span>
+        </div>
+        <div style="margin-top:6px;">
+          <small>Sector:</small> <span class="tag">${e.sector || "—"}</span>
+        </div>
+      `;
+      grid.appendChild(el);
+    });
+
+    // Gallery
+    const gal = document.getElementById("gal");
+    gal.innerHTML = "";
+    if(!data.fotos || data.fotos.length===0){
+      for(let i=0;i<8;i++){
+        const ph = document.createElement("div");
+        ph.className = "ph";
+        gal.appendChild(ph);
+      }
+      return;
+    }
+    data.fotos.forEach(src=>{
+      const wrap = document.createElement("div");
+      wrap.className = "ph";
+      wrap.style.backgroundImage = `url('${src}')`;
+      wrap.style.backgroundSize = "cover";
+      wrap.style.backgroundPosition = "center";
+      gal.appendChild(wrap);
+    });
+  };
+
+  render("all");
+
+  document.querySelectorAll("[data-filter]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      document.querySelectorAll("[data-filter]").forEach(b=>b.classList.remove("active"));
+      btn.classList.add("active");
+      render(btn.getAttribute("data-filter"));
+    });
+  });
+</script>
+</body>
+</html>
