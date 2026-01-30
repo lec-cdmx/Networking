@@ -13,7 +13,7 @@
 <header class="nav">
   <div class="container nav-inner">
     <a class="brand" href="index.html">
-      <div class="brand-badge" aria-hidden="true"></div>
+      <img src="js/logo.png" alt="Logo Networking" style="width: 40px; height: 40px; object-fit: cover; border-radius: 8px;">
       <div class="brand-title">
         <strong>Networking Economía</strong>
         <span>Registro alumnxs</span>
@@ -41,97 +41,57 @@
       <div>
         <h1 class="h1" style="margin:0;">Registro alumnxs</h1>
         <p class="sub">
-          El registro solicita nombre, matrícula, campus, transporte, sugerencias y <b>CV obligatorio en PDF</b>.
-          <br/>Para que el PDF se guarde, usa Google Form (recomendado) o un servicio externo.
+          Completa el formulario con tus datos. Después de registrarte, deberás enviar tu <b>CV en PDF</b> por correo electrónico al director de programa de tu campus.
         </p>
       </div>
-      <span class="badge">CV en PDF: obligatorio</span>
+      <span class="badge">CV en PDF: obligatorio por correo</span>
     </div>
 
-    <div class="grid-3" style="margin-top:14px;">
-      <div class="card reveal">
-        <h3>Opción recomendada: Google Form</h3>
-        <p>Permite “File upload” y guarda CVs en Drive. Es lo más simple con GitHub Pages.</p>
-        <div style="margin-top:12px;">
-          <a class="btn primary" id="btnGoogleForm" href="#" target="_blank" rel="noopener">Abrir Google Form (pegar link)</a>
-          <p class="helper" style="margin-top:8px;">
-            Edita el link en el HTML: busca <b>GOOGLE_FORM_URL</b> y reemplaza.
-          </p>
+    <div class="card reveal">
+      <h3>Formulario de registro</h3>
+      <div style="margin-top: 20px;">
+        <iframe 
+          width="100%" 
+          height="800px" 
+          src="https://forms.office.com/Pages/ResponsePage.aspx?id=DQSIkWdsW0yxEjajBLZtrQAAAAAAAAAAAAN__jZdNTlUNkhYMFdJME5ETUtLNDlVUjZKOEtPNllQMy4u&embed=true" 
+          frameborder="0" 
+          marginwidth="0" 
+          marginheight="0" 
+          style="border: none; max-width: 100%; max-height: 100vh;" 
+          allowfullscreen 
+          webkitallowfullscreen 
+          mozallowfullscreen 
+          msallowfullscreen>
+        </iframe>
+      </div>
+    </div>
+
+    <div class="banner reveal" style="margin-top: 24px;">
+      <h3 style="margin-top: 0;"><b>IMPORTANTE: Envío de CV</b></h3>
+      <p style="margin-bottom: 16px;">Una vez completado el registro, envía tu <b>CV en formato PDF</b> al correo del director de programa de tu campus:</p>
+      
+      <div style="display: grid; gap: 12px; margin-top: 16px;">
+        <div style="padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #00d4ff;">
+          <p style="margin: 0;"><b>Campus Ciudad de México:</b></p>
+          <p style="margin: 4px 0 0 0;">Mtro. Marco Méndez Atienza → <a href="mailto:marco.mendez@tec.mx" style="color: #00d4ff;">marco.mendez@tec.mx</a></p>
+        </div>
+
+        <div style="padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #00d4ff;">
+          <p style="margin: 0;"><b>Campus Santa Fe:</b></p>
+          <p style="margin: 4px 0 0 0;">Mtra. Josselyn Barranco Santamaría → <a href="mailto:cjbarranco@tec.mx" style="color: #00d4ff;">cjbarranco@tec.mx</a></p>
+        </div>
+
+        <div style="padding: 12px; background: rgba(255,255,255,0.05); border-radius: 8px; border-left: 4px solid #00d4ff;">
+          <p style="margin: 0;"><b>Campus Estado de México:</b></p>
+          <p style="margin: 4px 0 0 0;">Dra. Diana Hernández González → <a href="mailto:dhernandez@tec.mx" style="color: #00d4ff;">dhernandez@tec.mx</a></p>
         </div>
       </div>
 
-      <div class="card reveal" style="grid-column: span 2;">
-        <h3>Formulario en la página (requiere endpoint externo)</h3>
-        <p class="helper">
-          Este formulario valida el PDF y puede enviar datos a Formspree/Getform/Basin.
-          En GitHub Pages no se puede guardar el archivo sin un endpoint.
-        </p>
-
-        <form class="form" id="registroForm"
-              action="ENDPOINT_URL_AQUI"
-              method="POST"
-              enctype="multipart/form-data"
-              style="margin-top:12px;">
-          <div class="field">
-            <label for="nombre">Nombre completo</label>
-            <input id="nombre" name="nombre" required placeholder="Nombre Apellido" />
-          </div>
-
-          <div class="field">
-            <label for="matricula">Matrícula</label>
-            <input id="matricula" name="matricula" required placeholder="A0XXXXXXX" />
-          </div>
-
-          <div class="field">
-            <label for="campus">Campus</label>
-            <select id="campus" name="campus" required>
-              <option value="" disabled selected>Selecciona</option>
-              <option>Campus Ciudad de México</option>
-              <option>Campus Estado de México</option>
-              <option>Campus Santa Fe</option>
-              <option>Otro</option>
-            </select>
-          </div>
-
-          <div class="field">
-            <label for="transporte">¿Necesitas transporte?</label>
-            <select id="transporte" name="transporte" required>
-              <option value="" disabled selected>Selecciona</option>
-              <option>Sí</option>
-              <option>No</option>
-            </select>
-          </div>
-
-          <div class="field span-2">
-            <label for="sugerencias">Sugerencias / comentarios</label>
-            <textarea id="sugerencias" name="sugerencias" rows="4" placeholder="Ej. horarios, instituciones que te interesan, logística..."></textarea>
-          </div>
-
-          <div class="field span-2">
-            <label for="cv">CV (PDF) · obligatorio</label>
-            <input id="cv" name="cv" type="file" accept="application/pdf" required />
-            <p class="helper">
-              Solo PDF. Si usas Google Form, el CV se sube ahí. Si usas este formulario, debes configurar un endpoint que acepte archivos.
-            </p>
-          </div>
-
-          <div class="field span-2">
-            <label>
-              <input type="checkbox" name="consentimiento" required />
-              Confirmo que mis datos se usarán únicamente para la logística del evento.
-            </label>
-          </div>
-
-          <div class="field span-2" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap;">
-            <button class="btn primary" type="submit">Enviar registro</button>
-            <span class="helper" id="formHint">Antes de publicar, reemplaza <b>ENDPOINT_URL_AQUI</b> por tu endpoint o usa Google Form.</span>
-          </div>
-        </form>
-      </div>
+      <p style="margin-top: 16px;"><b>Asunto del correo sugerido:</b> Networking LEC 2026 - CV [Tu Nombre] - [Tu Matrícula]</p>
     </div>
 
-    <div class="banner reveal">
-      <p><b>Recomendación:</b> si tu CV no está listo, usa la sección FAQ para checklist rápido.</p>
+    <div class="banner reveal" style="margin-top: 16px;">
+      <p><b>¿Tu CV no está listo?</b> Consulta nuestra sección de FAQ para un checklist rápido de lo que debe incluir.</p>
       <a class="btn" href="faq.html">Ver checklist en FAQ</a>
     </div>
   </section>
@@ -141,7 +101,7 @@
   <div class="container footer-grid">
     <div>
       <strong>¿Dudas con el registro?</strong>
-      <p>Ve a FAQ o Contacto. Idealmente, el registro se centraliza vía Google Form para manejar CVs.</p>
+      <p>Ve a FAQ o Contacto para más información sobre el proceso.</p>
     </div>
     <div>
       <strong>Contacto</strong>
@@ -151,32 +111,5 @@
 </footer>
 
 <script src="js/main.js"></script>
-<script>
-  // Pega aquí el link de tu Google Form:
-  const GOOGLE_FORM_URL = "GOOGLE_FORM_URL";
-  const btn = document.getElementById("btnGoogleForm");
-  btn.href = GOOGLE_FORM_URL;
-
-  // Validación extra de PDF (por si el navegador no respeta accept)
-  const form = document.getElementById("registroForm");
-  form.addEventListener("submit", (e)=>{
-    const cv = document.getElementById("cv");
-    if(!cv.files || !cv.files[0]) return;
-    const file = cv.files[0];
-    const isPdf = file.type === "application/pdf" || file.name.toLowerCase().endsWith(".pdf");
-    if(!isPdf){
-      e.preventDefault();
-      alert("El CV debe ser un archivo PDF.");
-      cv.value = "";
-      return;
-    }
-    // Si no configuraron endpoint, bloquear para evitar “falso envío”
-    const action = (form.getAttribute("action")||"").trim();
-    if(action === "ENDPOINT_URL_AQUI"){
-      e.preventDefault();
-      alert("Falta configurar el endpoint para recibir el registro con archivo. Usa Google Form o pega el URL del servicio (Formspree/Getform/Basin).");
-    }
-  });
-</script>
 </body>
 </html>
